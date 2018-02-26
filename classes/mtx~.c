@@ -6,9 +6,9 @@ typedef struct _mtx{
     t_object    x_obj;
     t_float     x_f;
     size_t      x_ch;
-    t_sample*   x_vtemp;
+    t_sample   *x_vtemp;
     size_t      x_vsize;
-    t_inlet *x_inlet;
+    t_inlet    *x_inlet;
 }t_mtx;
 
 t_int *mtx_perform(t_int *w){
@@ -54,15 +54,21 @@ void mtx_dsp(t_mtx *x, t_signal **sp){
             vec[2] = (t_int)x->x_vtemp;     // sample vectors?
             vec[3] = (t_int)sp[0]->s_vec;     // gate
             for(i = 0; i < x->x_ch * 2; ++i)
+            {
                 vec[i+4] = (t_int)sp[i+1]->s_vec; // vec[i+4]
+            }
             dsp_addv(mtx_perform, (x->x_ch * 2 + 4), vec); // x->x_ch * 2 + 4
             freebytes(vec, (x->x_ch * 2 + 3) * sizeof(t_int)); // change?? to "+ 3"?s
         }
         else
+        {
             pd_error(x, "[mtx~]: can't allocate temporary vectors.");
+        }
     }
     else
+    {
         pd_error(x, "[mtx~]: can't allocate temporary vectors.");
+    }
 }
 
 static void *mtx_new(t_float f){
