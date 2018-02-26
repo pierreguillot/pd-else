@@ -9,6 +9,7 @@ include(pd.build/pd.cmake)
 
 project(pd-else)
 set_pd_sources(${PROJECT_SOURCE_DIR}/pd/src/)
-set_pd_external_path("${PROJECT_SOURCE_DIR}/externals/")
+set_pd_external_path("${PROJECT_SOURCE_DIR}/help/")
 
 add_pd_external(multigate_tilde_project multigate~ ${PROJECT_SOURCE_DIR}/classes/multigate~.c)
+add_pd_external(mtx_tilde_project mtx~ ${PROJECT_SOURCE_DIR}/classes/mtx~.c)
