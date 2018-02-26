@@ -1,4 +1,4 @@
-#include "m_pd.h"
+#include <m_pd.h>
 
 #define MAX_N_CH 512   // maximum number of channels
 
